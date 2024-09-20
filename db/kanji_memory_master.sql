@@ -1,4 +1,4 @@
--- phpMyAdmin SQL Dump
+n-- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `quizlet_clone`
+-- Database: `kanji_memory_master`
 --
 
 -- --------------------------------------------------------
