@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanji Memory Master</title>
+    <link rel="stylesheet" href="include/course.css" />
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Kanji Memory Master</h1>
+            <button class="btn btn-primary">+ Create Course</button>
+            <span>👤</span>
+        </header>
+        <nav>
+            <ul>
+                <li>🏠 Home</li>
+                <li>📚 Your library</li>
+                <li>Learn</li>
+                <li>📝 Quizzes</li>
+            </ul>
+        </nav>
+        <main>
+            <div class="create-course">
+                <h2>Create a new Course</h2>
+                <input type="text" placeholder="Enter a title, like 'N3 - Kanji'">
+                <input type="text" placeholder="Add a description">
+                <button class="btn btn-success">Add FlashCard</button>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>NO</th>
+                            <th>Term</th>
+                            <th>Definition</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>日本</td>
+                            <td>Japan</td>
+                            <td><button class="icon-button">✏️</button></td>
+                            <td><button class="icon-button">🗑️</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button class="btn btn-success" style="margin-top: 20px;">Create</button>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
