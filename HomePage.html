@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanji Memory Master</title>
+    <link rel="stylesheet" href="include/HomePage.css">
+</head>
+
+<body>
+    <header>
+        <div class="menu-icon" onclick="toggleMenu()">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <h1 class="title">Kanji Memory Master</h1>
+        <button class="create-course">+ Create Course</button>
+        <div class="user-icon"></div>
+    </header>
+
+    <nav class="sidebar" id="sidebar">
+        <ul>
+            <li onclick="showSection('home')"><span class="icon"></span> Home</li>
+            <li onclick="showSection('library')"><span class="icon"></span> Your library</li>
+            <p>Learn</p>
+            <li onclick="showSection('quizzes')"><span class="icon"></span> Quizzes</li>
+        </ul>
+    </nav>
+
+    <div class="container" id="container">
+        <!-- Your Course section -->
+        <main class="content" id="home-section" style="display: none;">
+            <section class="course-section">
+                <h2>Your Course</h2>
+                <div class="course-list">
+                    <div class="course">第二課<br>30 terms <br>😍 longdeepzai</div>
+                    <div class="course">第三課<br>26 terms <br>😍 longdeepzai</div>
+                </div>
+            </section>
+            <section class="favourite-section">
+                <h2>Favourite</h2>
+                <div class="favourite-list">
+                    <div class="favourite">Điện toán đám mây<br>30 terms <br>😍 longdeepzai</div>
+                    <div class="favourite">How to Hackfb<br>15 terms <br>😎 thanhHo123</div>
+                </div>
+            </section>
+            <section class="top-creators-section">
+                <h2>Top-creators</h2>
+                <div class="creators-list">
+                    <div class="creator">Điện toán đám mây<br>30 terms <br>😍 longdeepzai</div>
+                    <div class="creator">How to Hackfb<br>15 terms <br>😎 thanhHo123</div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Library section  -->
+        <main class="content" id="library-section" style="display: none;">
+            <h2>Your Library</h2>
+            <p>Content related to Your Library...</p>
+        </main>
+
+        <!-- Quizzes Section -->
+        <main class="content" id="quizzes-section" style="display: none;">
+            <section class="quiz-list">
+                <h2>List Quizzes</h2>
+                <div class="quizzes">
+                    <div class="quiz-item" onclick="showQuizScreen()">Quiz 1</div>
+                    <div class="quiz-item" onclick="showQuizScreen()">Quiz 2</div>
+                    <div class="quiz-item" onclick="showQuizScreen()">Quiz 3</div>
+                    <div class="quiz-item" onclick="showQuizScreen()">Quiz 4</div>
+                    <div class="quiz-item" onclick="showQuizScreen()">Quiz 5</div>
+                    <div class="quiz-item" onclick="showQuizScreen()">Quiz 6</div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Quiz Screen -->
+        <main class="content" id="quiz-screen-section" style="display: none;">
+            <h2>Quiz</h2>
+            <div class="quiz-header">
+                <button class="quiz-tab">Take Quizzes</button>
+                <button class="quiz-tab">Show Results</button>
+            </div>
+
+
+            <div class="take-quizzes-body">
+                <div class="quiz-detail">
+                    <p>Level: N3</p>
+                    <p>Questions: 1/20</p>
+                    <p>Time: 15p</p>
+                </div>
+
+                <div class="quiz-question">
+                    <p>Question 1: </p>
+                </div>
+
+                <div class="options">
+                    <div>A:</div>
+                    <div>B:</div>
+                    <div>C:</div>
+                    <div>D:</div>
+                </div>
+
+                <div class="quiz-footer">
+                    <button>←</button>
+                    <button>Submit</button>
+                    <button>→</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- footer -->
+    <footer>
+        <a href="#">Điều khoản dịch vụ</a>
+        <a href="#">Hỗ trợ</a>
+    </footer>
+
+    <script>
+        // Toggle Sidebar Menu
+        function toggleMenu() {
+            var sidebar = document.getElementById("sidebar");
+            var container = document.getElementById("container");
+            sidebar.classList.toggle("active");
+            container.classList.toggle("menu-active");
+        }
+
+        // Display section
+        function showSection(section) {
+            document.getElementById("home-section").style.display = "none";
+            document.getElementById("library-section").style.display = "none";
+            document.getElementById("quizzes-section").style.display = "none";
+            document.getElementById("quiz-screen-section").style.display = "none";
+
+            document.getElementById(section + "-section").style.display = "block";
+        }
+
+        // Show quiz screen
+        function showQuizScreen() {
+            showSection('quiz-screen');
+        }
+
+        // Add active class to clicked item
+        const sidebarItems = document.querySelectorAll('.sidebar ul li');
+
+        sidebarItems.forEach(item => {
+            item.addEventListener('click', function () {
+                sidebarItems.forEach(el => el.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>
