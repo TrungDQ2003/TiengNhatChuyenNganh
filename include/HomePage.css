@@ -217,6 +217,7 @@ h2 {
 }
 
 
+
 .quiz-header button {
     background-color: #e0e0e0;
     color: black;
@@ -230,6 +231,13 @@ h2 {
 .quiz-header button:hover {
     background-color: #1381C1;
 }
+
+.button-active {
+    background-color: #007bff !important;
+    color: #ddd !important;
+}
+
+
 
 .take-quizzes-body {
     background-color: white;
@@ -323,6 +331,49 @@ h2 {
 .quiz-footer .submit-btn:hover {
     background-color: #45A049;
 }
+
+
+
+/* take-result */
+
+
+.results-table {
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+table th, table td {
+    text-align: center;
+    padding: 10px;
+}
+
 
 
 footer {
