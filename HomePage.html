@@ -77,39 +77,82 @@
         </main>
 
         <!-- Quiz Screen -->
-        <main class="content" id="quiz-screen-section" style="display: none;">
-            <h2>Quiz</h2>
-            <div class="quiz-header">
-                <button class="quiz-tab">Take Quizzes</button>
-                <button class="quiz-tab">Show Results</button>
-            </div>
+<main class="content" id="quiz-screen-section" style="display: none;">
+    <h2>Quiz</h2>
+    <div class="quiz-header">
+        <button class="quiz-tab button-active quiz1" onclick="showQuiz('take')" >Take Quizzes</button>
+        <button class="quiz-tab quiz2" onclick="showQuiz('results')">Show Results</button>
+    </div>
+
+    <div class="take-quizzes-body" id="take-quizzes" style="display: block;">
+        <div class="quiz-detail">
+            <p>Level: N3</p>
+            <p>Questions: 1/20</p>
+            <p>Time: 15p</p>
+        </div>
+
+        <div class="quiz-question">
+            <p>Question 1: What is the Kanji for "water"?</p>
+        </div>
+
+        <div class="options">
+            <div>A: 水</div>
+            <div>B: 火</div>
+            <div>C: 土</div>
+            <div>D: 風</div>
+        </div>
+
+        <div class="quiz-footer">
+            <button>←</button>
+            <button>Submit</button>
+            <button>→</button>
+        </div>
+    </div>
+
+    <div class="quiz-results" id="quiz-results" style="display: none;">
+        <div class="results-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Exam</th>
+                        <th>Point</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Test 1</td>
+                        <td>9/10</td>
+                        <td>45 minute</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Test 2</td>
+                        <td>8/10</td>
+                        <td>45 minute</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Test 3</td>
+                        <td>7/10</td>
+                        <td>45 minute</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Test 4</td>
+                        <td>10/10</td>
+                        <td>45 minute</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
 
-            <div class="take-quizzes-body">
-                <div class="quiz-detail">
-                    <p>Level: N3</p>
-                    <p>Questions: 1/20</p>
-                    <p>Time: 15p</p>
-                </div>
+</main>
 
-                <div class="quiz-question">
-                    <p>Question 1: </p>
-                </div>
-
-                <div class="options">
-                    <div>A:</div>
-                    <div>B:</div>
-                    <div>C:</div>
-                    <div>D:</div>
-                </div>
-
-                <div class="quiz-footer">
-                    <button>←</button>
-                    <button>Submit</button>
-                    <button>→</button>
-                </div>
-            </div>
-        </main>
     </div>
 
     <!-- footer -->
@@ -119,6 +162,9 @@
     </footer>
 
     <script>
+
+
+
         // Toggle Sidebar Menu
         function toggleMenu() {
             var sidebar = document.getElementById("sidebar");
@@ -141,6 +187,31 @@
         function showQuizScreen() {
             showSection('quiz-screen');
         }
+
+        function showQuiz(mode) {
+            const quiz1 = document.getElementsByClassName("quiz1")[0]; // Sửa để lấy phần tử đầu tiên
+            const quiz2 = document.getElementsByClassName("quiz2")[0]; // Sửa để lấy phần tử đầu tiên
+            const takeQuizzes = document.getElementById("take-quizzes");
+            const quizResults = document.getElementById("quiz-results");
+        
+            // Xóa active class khỏi cả hai nút
+            quiz1.classList.remove('button-active');
+            quiz2.classList.remove('button-active');
+        
+            if (mode === 'take') {
+                takeQuizzes.style.display = "block";
+                quizResults.style.display = "none";
+                quiz1.classList.add('button-active'); // Thêm active cho nút take
+            } else if (mode === 'results') {
+                takeQuizzes.style.display = "none";
+                quizResults.style.display = "block";
+                quiz2.classList.add('button-active'); // Thêm active cho nút results
+            }
+        }
+        
+
+        
+        
 
         // Add active class to clicked item
         const sidebarItems = document.querySelectorAll('.sidebar ul li');
