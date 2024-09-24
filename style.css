@@ -1,0 +1,174 @@
+.sidebar {
+    background-color: #f8f9fa;
+    transition: width 0.3s;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+}
+
+.content {
+    padding: 20px;
+    transition: margin-left 0.3s, width 0.3s;
+    margin-right: 100px;
+
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 20px;
+    background-color: rgb(193, 192, 192);
+    border-radius: 10px;
+}
+
+.nav-item.active {
+    background-color: #75fff6;
+}
+
+.nav-item a {
+    color: #000 !important;
+    text-decoration: none;
+    display: block;
+    padding: 10px 20px;
+    transition: background-color 0.3s;
+}
+
+.nav-link {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: relative;
+}
+
+.nav-link i {
+    margin-right: 10px;
+    font-size: 24px;
+}
+
+.hide-text {
+    display: none;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 0 0 60px 0;
+    margin: 0 0 20px 0;
+}
+
+.card:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.card .author {
+    position: absolute;
+    bottom: 10px;
+    right: 30px;
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+h3, hr {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 600px;
+    width: 90vw;
+    padding: 20px;
+    box-sizing: border-box;
+}
+#flashCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80%;
+    width: 100%;
+}
+
+.carousel-inner {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.carousel-item {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+}
+
+.flash-card {
+    background-color: #f8f9fa;
+    border: 1px solid #929292;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin:0 15px;
+    padding: 20px 20px 0 20px;
+    width: 1038px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
+    position: relative;
+}
+
+.flash-card.flipped {
+    transform: rotateX(180deg);
+}
+
+.flash-card .font,
+.flash-card .back {
+    display: flex;
+    position: absolute;
+    font-size: 1.5em;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.flash-card .back {
+    transform: rotateX(180deg);
+}
+
+.carousel-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1038px;
+    border: 1px solid #929292;
+    height: 20%;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    display: flex!important;
+    justify-content: center!important;
+    align-items: center1!important;
+    width: 50px;
+    height: 50px;
+    position: static!important;
+}
