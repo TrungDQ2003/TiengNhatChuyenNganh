@@ -21,9 +21,13 @@ header {
     padding: 10px 20px;
     background-color: white;
     border-bottom: 1px solid #ccc;
-    position: relative;
-    z-index: 2;
+    position: fixed; /* Giữ header cố định */
+    top: 0; /* Đặt ở đầu trang */
+    left: 0;
+    width: 100%; /* Đảm bảo nó chiếm toàn bộ chiều rộng */
+    z-index: 2; /* Đảm bảo nó nằm trên các phần tử khác */
 }
+
 
 .title {
     font-family: 'Comic Sans MS', cursive;
@@ -132,7 +136,9 @@ header {
     padding: 20px;
     margin-left: 0;
     transition: margin-left 0.3s ease;
+    margin-top: 50px; /* Đẩy nội dung xuống dưới để không bị header che */
 }
+
 
 .container.menu-active {
     margin-left: 200px;
