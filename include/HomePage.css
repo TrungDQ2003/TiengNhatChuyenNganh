@@ -299,11 +299,18 @@ h2 {
     border: 1px solid #ddd;
     cursor: pointer;
     text-align: left;
+    transition: background-color 0.3s, border-color 0.3s;
 }
 
 .options div:hover {
     background-color: #e0e0e0;
     border-color: #ccc;
+}
+
+.options div.selected {
+    background-color: #007bff; 
+    color: white;
+    border-color: #0056b3; 
 }
 
 .quiz-footer {
