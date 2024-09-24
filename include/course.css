@@ -3,16 +3,16 @@ body {
     margin: 0;
     padding: 0;
 }
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-}
+
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    padding: 10px 20px;
+    background-color: white;
+    border-bottom: 1px solid #ccc;
+    position: relative;
+    z-index: 2;
 }
 nav {
     width: 200px;
@@ -28,10 +28,19 @@ nav ul li {
 main {
     margin-left: 220px;
 }
-.create-course {
+.box {
     background-color: #f0f0f0;
     padding: 20px;
     border-radius: 5px;
+}
+.create-course {
+    background-color: #00bfff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
 }
 input[type="text"] {
     width: 100%;
@@ -65,4 +74,102 @@ th, td {
     background: none;
     border: none;
     cursor: pointer;
+}
+.title {
+    font-family: 'Comic Sans MS', cursive;
+    font-size: 1.5em;
+    color: #333;
+}
+.user-icon {
+    width: 30px;
+    height: 30px;
+    background-color: #ccc;
+    border-radius: 50%;
+}
+
+.menu-icon {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.menu-icon .bar {
+    width: 25px;
+    height: 3px;
+    background-color: black;
+    margin: 3px 0;
+}
+
+.sidebar {
+    position: fixed;
+    left: -250px;
+    top: 40px;
+    width: 200px;
+    height: 100%;
+    background-color: #e6f7f7;
+    transition: left 0.3s ease;
+    z-index: 1;
+}
+
+.sidebar.active {
+    left: 0;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding-top: 20px;
+}
+
+.sidebar li {
+    padding: 10px 0 10px 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar p {
+    border-top: 1px solid black;
+    text-align: left;
+    margin: 10px 0;
+    padding: 10px 0 0 10px;
+    font-weight: bold;
+}
+
+.sidebar li.active {
+    background-color: #00e4e4;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+.sidebar ul li {
+    cursor: pointer;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar ul li:hover {
+    background-color: #00bfff;
+}
+
+.sidebar ul li.active {
+    background-color: #007bff;
+    color: white;
+}
+footer {
+    background-color: #f1f1f1;
+    text-align: left;
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+    bottom: 0;
+    border-top: 1px solid #ccc;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    background-color: #000;
+    margin-right: 10px;
 }
