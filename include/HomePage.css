@@ -25,10 +25,12 @@ header {
     z-index: 2;
 }
 
+/* Center the title */
 .title {
     font-family: 'Comic Sans MS', cursive;
     font-size: 1.5em;
     color: #333;
+    margin: 0 auto; /* Center the title */
 }
 
 .create-course {
@@ -39,6 +41,7 @@ header {
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
+    margin-right: 20px; /* Add some margin to the right of the button */
 }
 
 .user-icon {
@@ -47,6 +50,7 @@ header {
     background-color: #ccc;
     border-radius: 50%;
 }
+
 
 .menu-icon {
     display: flex;
