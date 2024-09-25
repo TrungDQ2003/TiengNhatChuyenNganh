@@ -6,7 +6,6 @@
     <title>Kanji Memory Master</title>
     <link rel="stylesheet" href="include/course.css" />
     <style>
-        /* Thêm kiểu cho bảng và các nút */
         table {
             width: 100%;
             margin-top: 20px;
@@ -34,7 +33,6 @@
             padding: 5px;
         }
 
-        /* Một số kiểu cho giao diện */
         .btn {
             padding: 10px 15px;
             margin: 5px;
@@ -95,7 +93,6 @@
                         </tr>
                     </thead>
                     <tbody id="flashcardTableBody">
-                        <!-- Flashcards sẽ được thêm vào đây -->
                     </tbody>
                 </table>
 
@@ -129,35 +126,29 @@
             });
         }
 
-        // Hàm thêm flashcard mới (demo cơ bản)
         document.getElementById('addFlashCardBtn').addEventListener('click', function() {
             flashcards.push({ term: '新しい単語', definition: 'New Word' });
             renderTable();
         });
 
-        // Hàm để xóa flashcard
         function deleteFlashcard(index) {
-            flashcards.splice(index, 1); // Xóa phần tử tại vị trí index
-            renderTable(); // Render lại bảng sau khi xóa
+            flashcards.splice(index, 1);
+            renderTable(); 
         }
 
-        // Hàm để chỉnh sửa flashcard
         function editFlashcard(index) {
             const termElement = document.querySelector(`#flashcardTableBody tr:nth-child(${index + 1}) .term`);
             const definitionElement = document.querySelector(`#flashcardTableBody tr:nth-child(${index + 1}) .definition`);
 
-            // Chuyển từ span sang input để chỉnh sửa
             termElement.innerHTML = `<input type="text" class="edit-input" value="${flashcards[index].term}" onblur="saveEdit(${index}, 'term', this.value)">`;
             definitionElement.innerHTML = `<input type="text" class="edit-input" value="${flashcards[index].definition}" onblur="saveEdit(${index}, 'definition', this.value)">`;
         }
 
-        // Hàm lưu lại chỉnh sửa sau khi người dùng nhấn ra ngoài
         function saveEdit(index, field, value) {
-            flashcards[index][field] = value; // Cập nhật dữ liệu
-            renderTable(); // Render lại bảng với dữ liệu mới
+            flashcards[index][field] = value;
+            renderTable(); 
         }
 
-        // Gọi hàm renderTable để hiển thị bảng khi tải trang
         renderTable();
     </script>
 </body>
