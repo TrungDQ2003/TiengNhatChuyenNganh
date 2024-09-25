@@ -5,6 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kanji Memory Master</title>
     <link rel="stylesheet" href="include/course.css" />
+    <style>
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .icon-button {
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 1.2em;
+        }
+
+        .edit-input {
+            width: 100%;
+            padding: 5px;
+        }
+
+        .btn {
+            padding: 10px 15px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+        }
+
+        header, nav, main {
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -26,7 +80,8 @@
                 <h2>Create a new Course</h2>
                 <input type="text" placeholder="Enter a title, like 'N3 - Kanji'">
                 <input type="text" placeholder="Add a description">
-                <button class="btn btn-success">Add FlashCard</button>
+                <button class="btn btn-success" id="addFlashCardBtn">Add FlashCard</button>
+
                 <table>
                     <thead>
                         <tr>
@@ -37,19 +92,63 @@
                             <th>Delete</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>日本</td>
-                            <td>Japan</td>
-                            <td><button class="icon-button">✏️</button></td>
-                            <td><button class="icon-button">🗑️</button></td>
-                        </tr>
+                    <tbody id="flashcardTableBody">
                     </tbody>
                 </table>
+
                 <button class="btn btn-success" style="margin-top: 20px;">Create</button>
             </div>
         </main>
     </div>
+
+    <script>
+        let flashcards = [
+            { term: '日本', definition: 'Japan' }
+        ];
+
+        function renderTable() {
+            const tableBody = document.getElementById('flashcardTableBody');
+            tableBody.innerHTML = '';
+
+            flashcards.forEach((flashcard, index) => {
+                const row = `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td><span class="term">${flashcard.term}</span></td>
+                        <td><span class="definition">${flashcard.definition}</span></td>
+                        <td><button class="icon-button" onclick="editFlashcard(${index})">✏️</button></td>
+                        <td><button class="icon-button" onclick="deleteFlashcard(${index})">🗑️</button></td>
+                    </tr>
+                `;
+                tableBody.innerHTML += row;
+            });
+        }
+
+        document.getElementById('addFlashCardBtn').addEventListener('click', function() {
+            flashcards.push({ term: '新しい単語', definition: 'New Word' });
+            renderTable();
+        });
+
+        function deleteFlashcard(index) {
+            flashcards.splice(index, 1);
+            renderTable();
+        }
+
+        function editFlashcard(index) {
+            const termElement = document.querySelector(`#flashcardTableBody tr:nth-child(${index + 1}) .term`);
+            const definitionElement = document.querySelector(`#flashcardTableBody tr:nth-child(${index + 1}) .definition`);
+
+
+            termElement.innerHTML = `<input type="text" class="edit-input" value="${flashcards[index].term}" onblur="saveEdit(${index}, 'term', this.value)">`;
+            definitionElement.innerHTML = `<input type="text" class="edit-input" value="${flashcards[index].definition}" onblur="saveEdit(${index}, 'definition', this.value)">`;
+        }
+
+        function saveEdit(index, field, value) {
+            flashcards[index][field] = value;
+            renderTable(); 
+        }
+
+        renderTable();
+    </script>
 </body>
 </html>
