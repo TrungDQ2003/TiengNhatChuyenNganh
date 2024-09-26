@@ -33,10 +33,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Chuyển hướng đến trang khác, ví dụ: dashboard.php
              header("Location: ../HomePage.html");
         } else {
-            echo "Sai mật khẩu!";
+            //echo "Sai mật khẩu!";
+            header("Location: ../index.html?error=wrong_password");
         }
     } else {
-        echo "Email không tồn tại!";
+        //echo "Email không tồn tại!";
+        header("Location: ../index.html?error=email_not_found");
     }
 
     $conn->close();
