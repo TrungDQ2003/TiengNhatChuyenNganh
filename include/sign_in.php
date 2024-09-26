@@ -6,7 +6,7 @@ $user = 'root'; // tên người dùng MySQL của bạn
 $password = ''; // mật khẩu MySQL của bạn
 
 // Tạo kết nối
-$conn = new mysqli($host, $user, $password, $db);
+$conn = new mysqli($host, $user, $password, $db, 3307);
 
 // Kiểm tra kết nối
 if ($conn->connect_error) {
@@ -29,9 +29,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         
         // Kiểm tra mật khẩu (so sánh mật khẩu nhập vào với mật khẩu đã hash)
         if (password_verify($password, $user['password'])) {
-            echo "Đăng nhập thành công!";
+            //echo "Đăng nhập thành công!";
             // Chuyển hướng đến trang khác, ví dụ: dashboard.php
-            // header("Location: dashboard.php");
+             header("Location: ../HomePage.html");
         } else {
             echo "Sai mật khẩu!";
         }
