@@ -5,7 +5,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 // Include the database connection
-require_once 'dbconnect.php';
+require_once 'include/dbconnect.php';
 
 // Get form data
 $term = $_POST['term'] ?? '';
@@ -51,7 +51,7 @@ if ($stmt = mysqli_prepare($link, $sql)) {
     // Execute the statement
     if (mysqli_stmt_execute($stmt)) {
         // Redirect on success
-        header("Location: add_flashcard.html");
+        header("Location: create_course.html");
         exit();
     } else {
         // If an error occurred, output it
