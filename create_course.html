@@ -149,6 +149,24 @@
         }
 
         renderTable();
+
+        // Toggle Sidebar Menu
+        function toggleMenu() {
+            var sidebar = document.getElementById("sidebar");
+            var container = document.getElementById("container");
+            sidebar.classList.toggle("active");
+            container.classList.toggle("menu-active");
+        }
+
+        // Display section
+        function showSection(section) {
+            document.getElementById("home-section").style.display = "none";
+            document.getElementById("library-section").style.display = "none";
+            document.getElementById("quizzes-section").style.display = "none";
+            document.getElementById("quiz-screen-section").style.display = "none";
+
+            document.getElementById(section + "-section").style.display = "block";
+        }
     </script>
 </body>
 </html>

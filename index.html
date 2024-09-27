@@ -6,12 +6,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="include/form.css" />
+    <style>
+        /* Pop-up styles */
+        .popup {
+            display: none; /* Ẩn mặc định */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .popup.active {
+            display: block; /* Hiển thị pop-up khi có class 'active' */
+        }
+
+        .popup button {
+            margin-top: 10px;
+            padding: 5px 10px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .popup-overlay {
+            display: none; /* Ẩn overlay mặc định */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .popup-overlay.active {
+            display: block; /* Hiển thị overlay khi có class 'active' */
+        }
+    </style>
 </head>
 
 <body>
     <section class="container">
         <header>Sign in to your account</header>
         <!-- thay # bằng thành file php để xử lý form -->
+
+        <!-- Pop-up thông báo -->
+        <div class="popup-overlay" id="popup-overlay"></div>
+        <div class="popup" id="popup">
+            <p id="popup-message">Invalid email or password!</p>
+            <button onclick="closePopup()">Close</button>
+        </div>
+
         <form action="include/sign_in.php" method="post" class="form">
             <div class="input-box">
                 <label>Email</label>
@@ -34,6 +87,37 @@
             <button type="submit" style="border-radius: 8px;">Sign In</button>
         </form>
     </section>
+
+    <script>
+        // Hàm để hiển thị pop-up
+        function showPopup(message) {
+            document.getElementById('popup-message').innerText = message;
+            document.getElementById('popup').classList.add('active');
+            document.getElementById('popup-overlay').classList.add('active');
+        }
+
+        // Hàm để đóng pop-up
+        function closePopup() {
+            document.getElementById('popup').classList.remove('active');
+            document.getElementById('popup-overlay').classList.remove('active');
+        }
+
+        // Kiểm tra query string để hiển thị lỗi
+        window.onload = function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const error = urlParams.get('error');
+
+            if (error) {
+                let message = '';
+                if (error === 'wrong_password') {
+                    message = 'Sai mật khẩu!';
+                } else if (error === 'email_not_found') {
+                    message = 'Email không tồn tại!';
+                }
+                showPopup(message);
+            }
+        };
+    </script>
 </body>
 
 </html>

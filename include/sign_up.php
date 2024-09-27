@@ -25,16 +25,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Hash password trước khi lưu vào database
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-    // Tạo câu lệnh SQL để chèn dữ liệu vào bảng user
-    $sql = "INSERT INTO user (username, password, email, gender, date_of_birth) 
-            VALUES ('$username', '$hashed_password', '$email', '$gender', '$date_of_birth')";
+    // Kiểm tra email đã tồn tại chưa
+    $sql_check_email = "SELECT * FROM user WHERE email='$email'";
+    $result_check_email = $conn->query($sql_check_email);
 
-    if ($conn->query($sql) === TRUE) {
-        // Chuyển hướng đến trang đăng nhập
-        header("Location: ../index.html"); // Đường dẫn tương đối đến trang đăng nhập
-        exit(); // Dừng thực thi script sau khi chuyển hướng
+    if ($result_check_email->num_rows > 0) {
+        // Email đã tồn tại, quay lại trang đăng ký với thông báo lỗi
+        header("Location: ../sign_up.html?error=email_exists");
+        exit();
     } else {
-        echo "Lỗi: " . $sql . "<br>" . $conn->error;
+        // Tạo câu lệnh SQL để chèn dữ liệu vào bảng user
+        $sql = "INSERT INTO user (username, password, email, gender, date_of_birth) 
+                VALUES ('$username', '$hashed_password', '$email', '$gender', '$date_of_birth')";
+
+        if ($conn->query($sql) === TRUE) {
+            // Đăng ký thành công, chuyển hướng lại trang sign_up.html với thông báo
+            header("Location: ../sign_up.html?success=registration_complete");
+            exit(); // Dừng thực thi script sau khi chuyển hướng
+        } else {
+            echo "Lỗi: " . $sql . "<br>" . $conn->error;
+        }
     }
 }
 
