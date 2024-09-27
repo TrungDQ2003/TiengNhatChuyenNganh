@@ -2,7 +2,7 @@
 $hostName='localhost';
 $userName='root';
 $password='';
-$database='quizlet_clone';
+$database='kanji_memory_master';
 
 $link = mysqli_connect($hostName,$userName,$password,$database);
 if($link){
