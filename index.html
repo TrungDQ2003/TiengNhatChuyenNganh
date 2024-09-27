@@ -110,9 +110,9 @@
             if (error) {
                 let message = '';
                 if (error === 'wrong_password') {
-                    message = 'Sai mật khẩu!';
+                    message = 'Wrong password!';
                 } else if (error === 'email_not_found') {
-                    message = 'Email không tồn tại!';
+                    message = 'Email does not exist!';
                 }
                 showPopup(message);
             }
