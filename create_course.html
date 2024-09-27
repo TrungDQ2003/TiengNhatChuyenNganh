@@ -52,7 +52,7 @@
         }
 
         .container {
-            width: 80%;
+            width: 100%;
             margin: auto;
         }
 
@@ -64,16 +64,22 @@
 <body>
     <div class="container">
         <header>
-            <h1>Kanji Memory Master</h1>
-            <button class="btn btn-primary">+ Create Course</button>
-            <span>👤</span>
+            <div class="menu-icon" onclick="toggleMenu()">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <h1 class="title">Kanji Memory Master</h1>
+            <a href="create_course.html"><button class="create-course">+ Create Course</button></a>
+            <div class="user-icon"></div>
         </header>
-        <nav>
+
+        <nav class="sidebar" id="sidebar">
             <ul>
-                <li>🏠 Home</li>
-                <li>📚 Your library</li>
-                <li>Learn</li>
-                <li>📝 Quizzes</li>
+                <a href="HomePage.html"><li class="active" onclick="showSection('home')"><span class="icon"></span> Home</li></a>
+                <li onclick="showSection('library')"><span class="icon"></span> Your library</li>
+                <p>Learn</p>
+                <li onclick="showSection('quizzes')"><span class="icon"></span> Quizzes</li>
             </ul>
         </nav>
         <main>

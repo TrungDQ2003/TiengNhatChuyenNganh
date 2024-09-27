@@ -41,6 +41,39 @@ main {
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
+    margin-right: 20px; 
+}
+.user-icon {
+    width: 30px;
+    height: 30px;
+    background-color: #ccc;
+    border-radius: 50%;
+}
+.menu-icon {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.menu-icon .bar {
+    width: 25px;
+    height: 3px;
+    background-color: black;
+    margin: 3px 0;
+}
+.sidebar {
+    position: fixed;
+    left: -250px;
+    top: 40px;
+    width: 200px;
+    height: 100%;
+    background-color: #e6f7f7;
+    transition: left 0.3s ease;
+    z-index: 1;
+}
+.sidebar.active {
+    left: 0;
 }
 input[type="text"] {
     width: 100%;
@@ -172,4 +205,10 @@ footer {
     height: 24px;
     background-color: #000;
     margin-right: 10px;
+}
+.title {
+    font-family: 'Comic Sans MS', cursive;
+    font-size: 1.5em;
+    color: #333;
+    margin: 0 auto; 
 }
