@@ -6,7 +6,7 @@ $user = 'root'; // tên người dùng MySQL của bạn
 $password = ''; // mật khẩu MySQL của bạn
 
 // Tạo kết nối
-$conn = new mysqli($host, $user, $password, $db, 3307);
+$conn = new mysqli($host, $user, $password, $db);
 
 // Kiểm tra kết nối
 if ($conn->connect_error) {
