@@ -1,21 +1,25 @@
 <?php
-require_once 'dbconnect.php';
+// Enable error reporting for debugging
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-$sql = "SELECT word AS f_term, f_definition FROM flashcard";
+require_once 'include/dbconnect.php';
+
+$sql = "SELECT f_term AS term, f_definition AS definition, f_image_url FROM flashcard";
 $result = mysqli_query($link, $sql);
+
 $flashcards = [];
 if ($result) {
-    // Fetch the data as an associative array
     while ($row = mysqli_fetch_assoc($result)) {
         $flashcards[] = $row;
     }
 }
 
-// Close the database connection
 mysqli_close($link);
 
+// Set the content type to JSON
 header('Content-Type: application/json');
-
 
 // Return the data as a JSON response
 echo json_encode($flashcards);
