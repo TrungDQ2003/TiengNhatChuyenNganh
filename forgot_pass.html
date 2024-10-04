@@ -1,30 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="/include/form.css" />
-</head>
+    <link rel="stylesheet" href="include/form.css" />
+    <title>Reset Password</title>
+  </head>
 
-<body>
+  <body>
     <section class="container">
-        <a href="index.html"><button class="go-back-to-login-page" style="border-radius: 8px;">Login</button></a>
-        <header style="padding-top: 20px ;">Reset your password</header>
-        <div style="padding-top: 20px; max-width: 630px; margin: 0 auto;">
-            <p>Enter the email you registered with. We'll send you a link to log in and reset your password. If you sign up with your parent's email, we'll send them a link.</p>
+      <a href="index.html">
+        <button class="go-back-to-login-page" style="border-radius: 8px">
+          Login
+        </button>
+      </a>
+      <header style="padding-top: 20px">Reset your password</header>
+      <div style="padding-top: 20px; max-width: 630px; margin: 0 auto">
+        <p>
+          Enter the email you registered with. We'll send you a link to log in
+          and reset your password. If you signed up with your parent's email,
+          we'll send them a link.
+        </p>
+      </div>
+
+      <!-- Form để người dùng nhập email -->
+      <form id="resetPasswordForm" class="form">
+        <div class="input-box">
+          <label>Email</label>
+          <input
+            type="text"
+            id="emailInput"
+            placeholder="Enter Email"
+            required
+          />
         </div>
-        <!-- thay # bằng thành file php để xử lý form -->
-        <form action="#" class="form">
-            <div class="input-box">
-                <label>Email</label>
-                <input type="text" placeholder="Enter Email" required />
-            </div>
+        <button type="button" id="sendEmailBtn" style="border-radius: 8px">
+          Send link
+        </button>
+      </form>
 
-            <button style="border-radius: 8px;">Send link</button>
-        </form>
+      <!-- Thông báo sẽ hiển thị sau khi gửi -->
+      <p id="confirmationMessage" style="color: green; padding-top: 20px"></p>
     </section>
-</body>
 
+    <!-- Script xử lý sự kiện -->
+    <script>
+      // Khi nhấn vào nút "Send link"
+      document
+        .getElementById("sendEmailBtn")
+        .addEventListener("click", function () {
+          // Lấy giá trị email từ input
+          var email = document.getElementById("emailInput").value;
+
+          // Kiểm tra xem email có được nhập không
+          if (email) {
+            // Hiển thị thông báo đã gửi link reset password
+            document.getElementById("confirmationMessage").textContent =
+              "A reset link has been sent to " + email;
+
+            // Xóa nội dung trong ô nhập email sau khi gửi
+            document.getElementById("emailInput").value = "";
+          } else {
+            // Hiển thị thông báo nếu email chưa được nhập
+            alert("Please enter a valid email address.");
+          }
+        });
+    </script>
+  </body>
 </html>
