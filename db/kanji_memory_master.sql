@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 20, 2024 at 04:26 AM
+-- Generation Time: Oct 04, 2024 at 05:16 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -29,12 +29,23 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `flashcard` (
   `flashcard_id` int(11) NOT NULL,
-  `deck_id` int(11) NOT NULL,
-  `word` varchar(255) NOT NULL,
-  `meaning` varchar(255) NOT NULL,
-  `image_url` mediumtext DEFAULT NULL,
+  `deck_id` int(11) DEFAULT NULL,
+  `f_term` varchar(255) NOT NULL,
+  `f_definition` varchar(255) NOT NULL,
+  `f_image_url` mediumtext DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `flashcard`
+--
+
+INSERT INTO `flashcard` (`flashcard_id`, `deck_id`, `f_term`, `f_definition`, `f_image_url`, `created_at`) VALUES
+(1, NULL, 'asd', 'asd', '', '2024-09-27 09:13:01'),
+(2, NULL, 'asd', '123', '', '2024-09-27 09:13:33'),
+(3, NULL, 'asd', '123', '', '2024-10-04 10:02:44'),
+(4, NULL, '123124', '1242rqwe', '', '2024-10-04 10:02:49'),
+(5, NULL, 'r243r23', '1qsdsdsddf', '', '2024-10-04 10:10:11');
 
 -- --------------------------------------------------------
 
@@ -169,7 +180,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `flashcard`
 --
 ALTER TABLE `flashcard`
-  MODIFY `flashcard_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `flashcard_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `flashcard_deck`

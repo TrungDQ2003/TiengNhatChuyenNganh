@@ -40,7 +40,7 @@ if(isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
 }
 
 // Prepare an SQL query with placeholders
-$sql = "INSERT INTO flashcard (word, meaning, image_url, created_at) VALUES (?, ?, ?, CURRENT_TIMESTAMP)";
+$sql = "INSERT INTO flashcard (f_term, f_definition, f_image_url, created_at) VALUES (?, ?, ?, CURRENT_TIMESTAMP)";
 
 // Initialize prepared statement
 if ($stmt = mysqli_prepare($link, $sql)) {

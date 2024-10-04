@@ -4,7 +4,7 @@ $userName='root';
 $password='';
 $database='kanji_memory_master';
 
-$link = mysqli_connect($hostName,$userName,$password,$database, 3307);
+$link = mysqli_connect($hostName,$userName,$password,$database);
 if($link){
     $con = mysqli_select_db($link,$database);
     mysqli_query($link,'SET CHARACTER SET utf8');
