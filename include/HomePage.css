@@ -21,11 +21,11 @@ header {
     padding: 10px 20px;
     background-color: white;
     border-bottom: 1px solid #ccc;
-    position: fixed; /* Giữ header cố định */
-    top: 0; /* Đặt ở đầu trang */
+    position: fixed; 
+    top: 0;
     left: 0;
-    width: 100%; /* Đảm bảo nó chiếm toàn bộ chiều rộng */
-    z-index: 2; /* Đảm bảo nó nằm trên các phần tử khác */
+    width: 100%; 
+    z-index: 2; 
 }
 
 
@@ -52,6 +52,41 @@ header {
     height: 30px;
     background-color: #ccc;
     border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 35px;
+    right: 0;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    overflow: hidden;
+    z-index: 2;
+}
+
+.dropdown-item {
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    text-decoration: none;
+}
+
+.material-icons {
+    margin-right: 10px;
+}
+
+.dropdown-item:hover {
+    background-color: #f0f0f0;
+}
+
+.dropdown-item:first-child {
+    border-bottom: 1px solid #333;
 }
 
 
