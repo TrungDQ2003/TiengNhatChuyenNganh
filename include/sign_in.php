@@ -9,7 +9,7 @@ $password = ''; // mật khẩu MySQL của bạn
 session_start();
 
 // Tạo kết nối
-$conn = new mysqli($host, $user, $password, $db);
+$conn = new mysqli($host, $user, $password, $db, 3307);
 
 // Kiểm tra kết nối
 if ($conn->connect_error) {

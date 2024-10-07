@@ -76,7 +76,17 @@
         </div>
         <h1 class="title">Kanji Memory Master</h1>
         <a href="create_course.html"><button class="create-course">+ Create Course</button></a>
-        <div class="user-icon"></div>
+        <div class="user-icon" onclick="toggleDropdown()">
+            <img style="width: 30px; height: 30px; border-radius: 50%; border: 1px solid black;" src="assets/hehe.jpg" alt="Profile Image">
+            <div id="dropdown-menu" class="dropdown-menu">
+                <a href="account_info.php" class="dropdown-item">
+                    <span class="material-icons">person</span> Information
+                </a>
+                <a href="index.html" class="dropdown-item">
+                    <span class="material-icons">logout</span>Log out
+                </a>
+            </div>
+        </div>
     </header>
 
     <nav class="sidebar" id="sidebar">
@@ -117,6 +127,25 @@
 
     <script>
         let editIndex = -1;  // Biến lưu trữ chỉ số khóa học đang chỉnh sửa
+
+        function toggleDropdown() {
+            var dropdownMenu = document.getElementById("dropdown-menu");
+            if (dropdownMenu.style.display === "block") {
+                dropdownMenu.style.display = "none";
+            } else {
+                dropdownMenu.style.display = "block";
+            }
+        }
+
+        // Close the dropdown when clicking outside
+        window.onclick = function (event) {
+            if (!event.target.closest('.user-icon')) {
+                var dropdownMenu = document.getElementById("dropdown-menu");
+                if (dropdownMenu.style.display === "block") {
+                    dropdownMenu.style.display = "none";
+                }
+            }
+        }
 
         // Toggle Sidebar Menu
         function toggleMenu() {
