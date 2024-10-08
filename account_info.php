@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <header>
+<header>
         <div class="menu-icon" onclick="toggleMenu()">
             <div class="bar"></div>
             <div class="bar"></div>
@@ -30,14 +30,15 @@
                 </a>
             </div>
         </div>
+
     </header>
 
     <nav class="sidebar" id="sidebar">
         <ul>
-            <li class="active" onclick="showSection('home')"><span class="icon"></span> Home</li>
-            <li onclick="showSection('library')"><span class="icon"></span> Your library</li>
+            <a href="HomePage.html" style="text-decoration: none;"><li class="active" onclick="showSection('home')"><span class="material-icons">home</span> Home</li></a>
+            <li onclick="showSection('library')"><span class="material-icons">folder</span> Your library</li>
             <p>Learn</p>
-            <li onclick="showSection('quizzes')"><span class="icon"></span> Quizzes</li>
+            <li onclick="showSection('quizzes')"><span class="material-icons">inventory_2</span> Quizzes</li>
         </ul>
     </nav>
 
@@ -51,17 +52,17 @@
             <table>
                 <tr>
                     <td>Username</td>
-                    <td>longdeepzai</td>
+                    <td>Trung</td>
                     <td><a href="#">Edit</a></td>
                 </tr>
                 <tr>
                     <td>Email</td>
-                    <td>longvip@gmail.com</td>
+                    <td>trung@gmail.com</td>
                     <td><a href="#">Edit</a></td>
                 </tr>
                 <tr>
                     <td>Date Of Birth</td>
-                    <td>06/01/2003</td>
+                    <td>12/01/2003</td>
                     <td><a href="#">Edit</a></td>
                 </tr>
                 <tr>
@@ -71,12 +72,12 @@
                 </tr>
                 <tr>
                     <td>Password</td>
-                    <td>*******</td>
+                    <td>********</td>
                     <td><a href="#">Edit</a></td>
                 </tr>
             </table>
         </div>
-        <button class="logout-btn">Logout</button>
+        <a href="index.html" style="text-decoration: none;"><button class="logout-btn">Logout</button></a>
     </div>
 
     <footer>
