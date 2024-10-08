@@ -5,6 +5,9 @@ $db = 'kanji_memory_master'; // tên database của bạn
 $user = 'root'; // tên người dùng MySQL của bạn
 $password = ''; // mật khẩu MySQL của bạn
 
+// Bắt đầu session
+session_start();
+
 // Tạo kết nối
 $conn = new mysqli($host, $user, $password, $db);
 
@@ -29,6 +32,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         
         // Kiểm tra mật khẩu (so sánh mật khẩu nhập vào với mật khẩu đã hash)
         if (password_verify($password, $user['password'])) {
+            // Lưu thông tin người dùng vào session
+            $_SESSION['user_ID'] = $user['ID']; // Lưu user ID
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['email'] = $user['email'];
+            $_SESSION['gender'] = $user['gender'];
+            $_SESSION['date_of_birth'] = $user['date_of_birth'];
+
             //echo "Đăng nhập thành công!";
             // Chuyển hướng đến trang khác, ví dụ: dashboard.php
              header("Location: ../HomePage.html");

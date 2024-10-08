@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kanji Memory Master</title>
     <link rel="stylesheet" href="include/HomePage.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
@@ -17,15 +18,26 @@
         </div>
         <h1 class="title">Kanji Memory Master</h1>
         <a href="create_course.html"><button class="create-course">+ Create Course</button></a>
-        <div class="user-icon"></div>
+        <div class="user-icon" onclick="toggleDropdown()">
+            <img style="width: 30px; height: 30px; border-radius: 50%; border: 1px solid black;" src="assets/hehe.jpg" alt="Profile Image">
+            <div id="dropdown-menu" class="dropdown-menu">
+                <a href="account_info.php" class="dropdown-item">
+                    <span class="material-icons">person</span> Information
+                </a>
+                <a href="index.html" class="dropdown-item">
+                    <span class="material-icons">logout</span>Log out
+                </a>
+            </div>
+        </div>
+
     </header>
 
     <nav class="sidebar" id="sidebar">
         <ul>
-            <li class="active" onclick="showSection('home')"><span class="icon"></span> Home</li>
-            <li onclick="showSection('library')"><span class="icon"></span> Your library</li>
+            <li class="active" onclick="showSection('home')"><span class="material-icons">home</span> Home</li>
+            <li onclick="showSection('library')"><span class="material-icons">folder</span> Your library</li>
             <p>Learn</p>
-            <li onclick="showSection('quizzes')"><span class="icon"></span> Quizzes</li>
+            <li onclick="showSection('quizzes')"><span class="material-icons">inventory_2</span> Quizzes</li>
         </ul>
     </nav>
 
@@ -42,15 +54,15 @@
             <section class="favourite-section">
                 <h2>Favourite</h2>
                 <div class="favourite-list">
-                    <div class="favourite">Điện toán đám mây<br>30 terms <br>😍 longdeepzai</div>
-                    <div class="favourite">How to Hackfb<br>15 terms <br>😎 thanhHo123</div>
+                    <div class="favourite">第二課<br>30 terms <br>😍 longdeepzai</div>
+                    <div class="favourite">第二課<br>15 terms <br>😎 thanhHo123</div>
                 </div>
             </section>
             <section class="top-creators-section">
                 <h2>Top-creators</h2>
                 <div class="creators-list">
-                    <div class="creator">Điện toán đám mây<br>30 terms <br>😍 longdeepzai</div>
-                    <div class="creator">How to Hackfb<br>15 terms <br>😎 thanhHo123</div>
+                    <div class="creator">第二課<br>30 terms <br>😍 longdeepzai</div>
+                    <div class="creator">第二課<br>15 terms <br>😎 thanhHo123</div>
                 </div>
             </section>
         </main>
@@ -163,6 +175,24 @@
 
     <script>
 
+        function toggleDropdown() {
+            var dropdownMenu = document.getElementById("dropdown-menu");
+            if (dropdownMenu.style.display === "block") {
+                dropdownMenu.style.display = "none";
+            } else {
+                dropdownMenu.style.display = "block";
+            }
+        }
+
+        // Close the dropdown when clicking outside
+        window.onclick = function (event) {
+            if (!event.target.closest('.user-icon')) {
+                var dropdownMenu = document.getElementById("dropdown-menu");
+                if (dropdownMenu.style.display === "block") {
+                    dropdownMenu.style.display = "none";
+                }
+            }
+        }
 
 
         // Toggle Sidebar Menu
