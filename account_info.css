@@ -94,7 +94,7 @@ table td a {
 }
 
 .logout-btn:before {
-    content: "\f08b"; /* Icon for logout */
+    /* content: "\f08b"; Icon for logout */
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     margin-right: 5px;

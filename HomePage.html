@@ -19,7 +19,8 @@
         <h1 class="title">Kanji Memory Master</h1>
         <a href="create_course.html"><button class="create-course">+ Create Course</button></a>
         <div class="user-icon" onclick="toggleDropdown()">
-            <img style="width: 30px; height: 30px; border-radius: 50%; border: 1px solid black;" src="assets/hehe.jpg" alt="Profile Image">
+            <img style="width: 30px; height: 30px; border-radius: 50%; border: 1px solid black;" src="assets/hehe.jpg"
+                alt="Profile Image">
             <div id="dropdown-menu" class="dropdown-menu">
                 <a href="account_info.php" class="dropdown-item">
                     <span class="material-icons">person</span> Information
@@ -47,22 +48,34 @@
             <section class="course-section">
                 <h2>Your Course</h2>
                 <div class="course-list">
-                    <div class="course">第二課<br>30 terms <br>😍 longdeepzai</div>
-                    <div class="course">第三課<br>26 terms <br>😍 longdeepzai</div>
+                    <a href="flashcard.html">
+                        <div class="course">第二課<br>30 terms <br>😍 longdeepzai</div>
+                    </a>
+                    <a href="flashcard.html">
+                        <div class="course">第三課<br>26 terms <br>😍 longdeepzai</div>
+                    </a>
                 </div>
             </section>
             <section class="favourite-section">
                 <h2>Favourite</h2>
                 <div class="favourite-list">
-                    <div class="favourite">第二課<br>30 terms <br>😍 longdeepzai</div>
-                    <div class="favourite">第二課<br>15 terms <br>😎 thanhHo123</div>
+                    <a href="flashcard.html">
+                        <div class="course">第二課<br>30 terms <br>😍 longdeepzai</div>
+                    </a>
+                    <a href="flashcard.html">
+                        <div class="course">第三課<br>26 terms <br>😍 longdeepzai</div>
+                    </a>
                 </div>
             </section>
             <section class="top-creators-section">
                 <h2>Top-creators</h2>
                 <div class="creators-list">
-                    <div class="creator">第二課<br>30 terms <br>😍 longdeepzai</div>
-                    <div class="creator">第二課<br>15 terms <br>😎 thanhHo123</div>
+                    <a href="flashcard.html">
+                        <div class="course">第二課<br>30 terms <br>😍 longdeepzai</div>
+                    </a>
+                    <a href="flashcard.html">
+                        <div class="course">第三課<br>26 terms <br>😍 longdeepzai</div>
+                    </a>
                 </div>
             </section>
         </main>
@@ -175,6 +188,15 @@
 
     <script>
 
+        window.onclick = function (event) {
+            if (!event.target.closest('.user-icon')) {
+                var dropdownMenu = document.getElementById("dropdown-menu");
+                if (dropdownMenu.style.display === "block") {
+                    dropdownMenu.style.display = "none";
+                }
+            }
+        }
+
         function toggleDropdown() {
             var dropdownMenu = document.getElementById("dropdown-menu");
             if (dropdownMenu.style.display === "block") {
@@ -224,6 +246,7 @@
             const takeQuizzes = document.getElementById("take-quizzes");
             const quizResults = document.getElementById("quiz-results");
 
+            
             // Xóa active class khỏi cả hai nút
             quiz1.classList.remove('button-active');
             quiz2.classList.remove('button-active');
@@ -238,6 +261,13 @@
                 quiz2.classList.add('button-active'); // Thêm active cho nút results
             }
         }
+
+        window.onload = function () {
+                const urlParams = new URLSearchParams(window.location.search);
+                const section = urlParams.get('section') || 'home';
+                showSection(section);
+            }
+
 
         // Get all option elements
         const options = document.querySelectorAll('.options div');
