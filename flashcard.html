@@ -59,10 +59,10 @@
 
     <nav class="sidebar" id="sidebar">
         <ul>
-            <li class="active" onclick="showSection('home')"><span class="icon"></span> Home</li>
-            <li onclick="showSection('library')"><span class="icon"></span> Your library</li>
+            <a href="HomePage.html?section=home"><li class="active"><span class="icon"></span> Home</li></a>
+            <a href="HomePage.html?section=library"><li><span class="icon"></span> Your library</li></a>
             <p>Learn</p>
-            <li onclick="showSection('quizzes')"><span class="icon"></span> Quizzes</li>
+            <a href="HomePage.html?section=quizzes"><li><span class="icon"></span> Quizzes</li></a>
         </ul>
     </nav>
     <div class="container" id="container">
@@ -152,7 +152,7 @@
             } else {
                 dropdownMenu.style.display = "block";
             }
-        }
+        } 
 
         // Close the dropdown when clicking outside
         window.onclick = function (event) {
