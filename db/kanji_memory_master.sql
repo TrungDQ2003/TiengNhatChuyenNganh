@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 04, 2024 at 05:16 AM
+-- Generation Time: Oct 09, 2024 at 04:12 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -69,6 +69,31 @@ CREATE TABLE `flashcard` (
 --
 
 INSERT INTO `flashcard` (`flashcard_id`, `deck_id`, `f_term`, `f_definition`, `f_image_url`, `created_at`) VALUES
+<<<<<<< HEAD
+(1, NULL, 'asd', 'asd', '', '2024-09-27 09:13:01'),
+(2, NULL, 'asd', '123', '', '2024-09-27 09:13:33'),
+(3, NULL, 'asd', '123', '', '2024-10-04 10:02:44'),
+(4, NULL, '123124', '1242rqwe', '', '2024-10-04 10:02:49'),
+(5, NULL, 'r243r23', '1qsdsdsddf', '', '2024-10-04 10:10:11'),
+(6, NULL, '43t3rsd', 'qwdferg', '', '2024-10-04 10:25:49'),
+(7, NULL, '猫', 'cat', '', '2024-10-04 10:35:43'),
+(8, NULL, '犬', 'DOG', '', '2024-10-08 11:27:46'),
+(9, NULL, '空', 'sky', '', '2024-10-09 20:40:40');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `flashcard_deck`
+--
+
+CREATE TABLE `flashcard_deck` (
+  `deck_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `deckname` varchar(255) NOT NULL,
+  `description` mediumtext DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+=======
 (1, 1, 'こんにちは', 'Hello', '', '2024-09-27 09:13:01'),
 (2, 1, 'ありがとう', 'Thank you', '', '2024-09-27 09:13:33'),
 (3, 1, 'さようなら', 'Goodbye', '', '2024-10-04 10:02:44'),
@@ -76,6 +101,7 @@ INSERT INTO `flashcard` (`flashcard_id`, `deck_id`, `f_term`, `f_definition`, `f
 (5, 2, '仕事', 'Work', '', '2024-10-04 10:10:11'),
 (6, 3, '漢字', 'Kanji', '', '2024-10-04 10:15:22'),
 (7, 3, '日本', 'Japan', '', '2024-10-04 10:20:33');
+>>>>>>> 076dd5082e2c3f11f8295c55997c751c90450cd8
 
 -- --------------------------------------------------------
 
@@ -143,6 +169,14 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`user_ID`, `username`, `password`, `email`, `gender`, `date_of_birth`, `isAdmin`, `created_at`) VALUES
+(1, 'shoorei', '$2y$10$cSIGuALFI.FrMxPboIJfzu3fZUxc9/JkwfGbD0M9JYt6ilZ7iCJES', '123@gmail.com', 'Male', '2002-06-15', 0, '2024-10-04 10:53:06'),
+(2, 'trung', '$2y$10$ZsjNCNO0pBEbH6iki5sSOuEHjMpoeqDc2.b7QcIsq2lm71nX1fnKW', 'trung@gmail.com', 'Male', '2003-12-01', 0, '2024-10-08 11:25:23');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -196,7 +230,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `flashcard`
 --
 ALTER TABLE `flashcard`
-  MODIFY `flashcard_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `flashcard_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `flashcard_deck`
@@ -220,7 +254,7 @@ ALTER TABLE `quiz_item`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
