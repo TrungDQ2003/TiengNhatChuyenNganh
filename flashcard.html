@@ -99,6 +99,37 @@
             <div id="flashCard" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner" id="carousel-inner">
                     <!-- Các flashcard sẽ được hiển thị ở đây -->
+                    <div class="carousel-item active">
+                        <div class="flash-card">
+                            <div class="font">
+                                <p>こんにちは</p>
+                            </div>
+                            <div class="back">
+                                <p>xin chào</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="flash-card">
+                            <div class="font">
+                                <p>ありがとう</p>
+                            </div>
+                            <div class="back">
+                                <p>cảm ơn</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="flash-card">
+                            <div class="font">
+                                <p>さようなら</p>
+                            </div>
+                            <div class="back">
+                                <p>tạm biệt</p>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
             </div>
@@ -121,99 +152,41 @@
 
 
     <script>
-        // Function to get query parameter
-        function getQueryParam(param) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(param);
-        }
-    
-        async function fetchFlashcardsAndCourse(deckId) {
-            try {
-                let response = await fetch(`flashcard.php?deck_id=${deckId}`);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                let data = await response.json();
-                displayCourseDetails(data.course);
-                displayFlashcards(data.flashcards);
-            } catch (error) {
-                console.error('Error fetching flashcards and course details:', error);
+        document.addEventListener('DOMContentLoaded', function () {
+            let currentIndex = 0;
+            const carouselItems = document.querySelectorAll('.carousel-item');
+            const flashcardCount = document.getElementById('flashcard-count');
+
+            function updateFlashcardCount() {
+                flashcardCount.innerText = `${currentIndex + 1}/${carouselItems.length}`;
             }
-        }
-    
-        function displayCourseDetails(course) {
-            document.getElementById('course-title').innerText = course.name;
-            document.getElementById('course-description').innerText = course.description;
-        }
-    
-        function displayFlashcards(flashcards) {
-            const carouselInner = document.getElementById('carousel-inner');
-            carouselInner.innerHTML = ''; // Xóa nội dung cũ nếu có
-    
-            flashcards.forEach((flashcard, index) => {
-                const carouselItem = document.createElement('div');
-                carouselItem.className = 'carousel-item' + (index === 0 ? ' active' : '');
-                carouselItem.innerHTML = `
-                    <div class="flash-card">
-                        <div class="font">
-                            <p>${flashcard.term}</p>
-                        </div>
-                        <div class="back">
-                            <p>${flashcard.definition}</p>
-                        </div>
-                    </div>
-                `;
-                carouselInner.appendChild(carouselItem);
-            });
-    
-            // Gán sự kiện click sau khi các flashcard đã được thêm vào DOM
+
+            function showNextSlide() {
+                carouselItems[currentIndex].classList.remove('active');
+                currentIndex = (currentIndex + 1) % carouselItems.length;
+                carouselItems[currentIndex].classList.add('active');
+                updateFlashcardCount();
+            }
+
+            function showPrevSlide() {
+                carouselItems[currentIndex].classList.remove('active');
+                currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
+                carouselItems[currentIndex].classList.add('active');
+                updateFlashcardCount();
+            }
+
+            document.querySelector('.carousel-control-next').addEventListener('click', showNextSlide);
+            document.querySelector('.carousel-control-prev').addEventListener('click', showPrevSlide);
+
+            // Gán sự kiện click cho các flashcard để lật thẻ
             const flashCards = document.querySelectorAll('.flash-card');
             flashCards.forEach(flashCard => {
                 flashCard.addEventListener('click', function () {
                     this.classList.toggle('flipped');
                 });
             });
-    
-            // Update flashcard count
-            updateFlashcardCount(1, flashcards.length);
-    
-        }
-    
-        function updateFlashcardCount(current, total) {
-            const flashcardCount = document.getElementById('flashcard-count');
-            flashcardCount.innerText = `${current}/${total}`;
-        }
-    
-        // Get deck_id from URL and fetch flashcards and course details
-        const deckId = getQueryParam('deck_id');
-        if (deckId) {
-            fetchFlashcardsAndCourse(deckId);
-        } else {
-            console.error('No deck_id provided in URL');
-        }
-    
-        document.addEventListener('DOMContentLoaded', function () {
-            
-            let currentIndex = 0;
 
-            function showNextSlide() {
-                const carouselItems = document.querySelectorAll('.carousel-item');
-                carouselItems[currentIndex].classList.remove('active');
-                currentIndex = (currentIndex + 1) % carouselItems.length;
-                carouselItems[currentIndex].classList.add('active');
-                updateFlashcardCount(currentIndex + 1, carouselItems.length);
-            }
-
-            function showPrevSlide() {
-                const carouselItems = document.querySelectorAll('.carousel-item');
-                carouselItems[currentIndex].classList.remove('active');
-                currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
-                carouselItems[currentIndex].classList.add('active');
-                updateFlashcardCount(currentIndex + 1, carouselItems.length);
-            }
-
-            document.querySelector('.carousel-control-next').addEventListener('click', showNextSlide);
-            document.querySelector('.carousel-control-prev').addEventListener('click', showPrevSlide);
+            updateFlashcardCount();
         });
     </script>
 
