@@ -81,7 +81,8 @@
             <h1 class="title">Kanji Memory Master</h1>
             <a href="create_course.html"><button class="create-course">+ Create Course</button></a>
             <div class="user-icon" onclick="toggleDropdown()">
-                <img style="width: 30px; height: 30px; border-radius: 50%; border: 1px solid black;" src="assets/hehe.jpg" alt="Profile Image">
+                <img style="width: 30px; height: 30px; border-radius: 50%; border: 1px solid black;"
+                    src="assets/hehe.jpg" alt="Profile Image">
                 <div id="dropdown-menu" class="dropdown-menu">
                     <a href="account_info.php" class="dropdown-item">
                         <span class="material-icons">person</span> Information
@@ -133,14 +134,9 @@
     <script>
         function toggleDropdown() {
             var dropdownMenu = document.getElementById("dropdown-menu");
-            if (dropdownMenu.style.display === "block") {
-                dropdownMenu.style.display = "none";
-            } else {
-                dropdownMenu.style.display = "block";
-            }
+            dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
         }
 
-        // Close the dropdown when clicking outside
         window.onclick = function (event) {
             if (!event.target.closest('.user-icon')) {
                 var dropdownMenu = document.getElementById("dropdown-menu");
@@ -150,10 +146,6 @@
             }
         }
 
-        let initialflashcards = [
-            { term: '日本', definition: 'Japan' }
-        ];
-
         async function fetchFlashcards() {
             try {
                 let response = await fetch('fetch_flashcard.php');
@@ -162,21 +154,19 @@
                 }
 
                 let data = await response.json();
-
-                // Check for errors in the response
                 if (data.error) {
                     console.error('Error:', data.error);
                     alert(data.error);
                     return;
                 }
 
-                // If successful, render the table
                 renderTable(data);
             } catch (error) {
                 console.error('Error fetching flashcards:', error);
                 alert('Failed to load flashcards. Please try again later.');
             }
         }
+
         window.onload = fetchFlashcards;
 
         function renderTable(flashcards) {
@@ -190,45 +180,51 @@
 
             flashcards.forEach((flashcard, index) => {
                 const row = `
-            <tr>
-                <td>${index + 1}</td>
-                <td><span class="term">${flashcard.term}</span></td>
-                <td><span class="definition">${flashcard.definition}</span></td>
-                <td><button class="icon-button" onclick="editFlashcard(${index})">✏️</button></td>
-                <td><button class="icon-button" onclick="deleteFlashcard(${index})">🗑️</button></td>
-            </tr>
-        `;
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td><span class="term">${flashcard.term}</span></td>
+                        <td><span class="definition">${flashcard.definition}</span></td>
+                        <td><button class="icon-button" onclick="editFlashcard(${flashcard.flashcard_id})">✏️</button></td>
+                        <td><button class="icon-button" onclick="deleteFlashcard(${flashcard.flashcard_id})">🗑️</button></td>
+                    </tr>
+                `;
                 tableBody.innerHTML += row;
             });
         }
 
-        // document.getElementById('addFlashCardBtn').addEventListener('click', function() {
-        //     flashcards.push({ term: '新しい単語', definition: 'New Word' });
-        //     renderTable();
-        // });
+        function editFlashcard(flashcard_id) {
+            // Redirect to the edit page with the flashcard ID as a query parameter
+            window.location.href = `edit_flashcard.html?flashcard_id=${flashcard_id}`;
+        }
+        function deleteFlashcard(id) {
+            if (confirm("Are you sure you want to delete this flashcard?")) {
+                const formData = new FormData();
+                formData.append('action', 'delete');
+                formData.append('flashcard_id', id);  // Sending flashcard_id
 
-        // function deleteFlashcard(index) {
-        //     flashcards.splice(index, 1);
-        //     renderTable();
-        // }
+                fetch('process_flashcard.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => response.text())  // Convert the response to text or .json() for JSON
+                    .then(data => {
+                        console.log("Deleting flashcard with ID:", id);
+                        console.log('Response from server:', data);  // Log the response from the server
+                        if (data.includes('Record deleted successfully')) {  // Check for success message
+                            fetchFlashcards();  // Reload the flashcards after deletion
+                        } else {
+                            alert('Failed to delete flashcard: ' + data);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);  // Log any errors that occur during the fetch
+                        alert('An error occurred while trying to delete the flashcard.');
+                    });
+            }
+        }
 
-        // function editFlashcard(index) {
-        //     const termElement = document.querySelector(`#flashcardTableBody tr:nth-child(${index + 1}) .term`);
-        //     const definitionElement = document.querySelector(`#flashcardTableBody tr:nth-child(${index + 1}) .definition`);
 
 
-        //     termElement.innerHTML = `<input type="text" class="edit-input" value="${flashcards[index].term}" onblur="saveEdit(${index}, 'term', this.value)">`;
-        //     definitionElement.innerHTML = `<input type="text" class="edit-input" value="${flashcards[index].definition}" onblur="saveEdit(${index}, 'definition', this.value)">`;
-        // }
-
-        // function saveEdit(index, field, value) {
-        //     flashcards[index][field] = value;
-        //     renderTable(); 
-        // }
-
-        // renderTable();
-
-        // Toggle Sidebar Menu
         function toggleMenu() {
             var sidebar = document.getElementById("sidebar");
             var container = document.getElementById("container");
@@ -236,7 +232,6 @@
             container.classList.toggle("menu-active");
         }
 
-        // Display section
         function showSection(section) {
             document.getElementById("home-section").style.display = "none";
             document.getElementById("library-section").style.display = "none";
