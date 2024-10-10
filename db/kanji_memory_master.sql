@@ -63,6 +63,7 @@ CREATE TABLE `flashcard` (
   FOREIGN KEY (`deck_id`) REFERENCES `flashcard_deck`(`deck_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+
 --
 -- Dumping data for table `flashcard`
 --
@@ -75,30 +76,6 @@ INSERT INTO `flashcard` (`flashcard_id`, `deck_id`, `f_term`, `f_definition`, `f
 (5, 2, '仕事', 'Work', '', '2024-10-04 10:10:11'),
 (6, 3, '漢字', 'Kanji', '', '2024-10-04 10:15:22'),
 (7, 3, '日本', 'Japan', '', '2024-10-04 10:20:33');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `flashcard_deck`
---
-
-CREATE TABLE `flashcard_deck` (
-  `deck_id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `deckname` varchar(255) NOT NULL,
-  `description` mediumtext DEFAULT NULL,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`deck_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Dumping data for table `flashcard_deck`
---
-
-INSERT INTO flashcard_deck (deck_id, user_id, deckname, description, created_at) VALUES
-(1, 1, 'Basic Japanese Vocabulary', 'Deck for basic Japanese vocabulary', '2024-09-27 09:00:00'),
-(2, 1, 'Advanced Japanese Vocabulary', 'Deck for advanced Japanese vocabulary', '2024-09-27 09:05:00'),
-(3, 2, 'Japanese Kanji Characters', 'Deck for learning Japanese Kanji characters', '2024-09-27 09:10:00');
 
 -- --------------------------------------------------------
 

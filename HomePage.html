@@ -47,35 +47,35 @@
         <main class="content" id="home-section" style="display: block;">
             <section class="course-section">
                 <h2>Your Course</h2>
-                <div class="course-list">
-                    <a href="flashcard.html">
+                <div class="course-list" id="course-list">
+                    <!-- <a href="flashcard.html">
                         <div class="course">第二課<br>30 terms <br>😍 longdeepzai</div>
                     </a>
                     <a href="flashcard.html">
                         <div class="course">第三課<br>26 terms <br>😍 longdeepzai</div>
-                    </a>
+                    </a> -->
                 </div>
             </section>
             <section class="favourite-section">
                 <h2>Favourite</h2>
-                <div class="favourite-list">
-                    <a href="flashcard.html">
+                <div class="favourite-list" id="favourite-list">
+                    <!-- <a href="flashcard.html">
                         <div class="course">第二課<br>30 terms <br>😍 longdeepzai</div>
                     </a>
                     <a href="flashcard.html">
                         <div class="course">第三課<br>26 terms <br>😍 longdeepzai</div>
-                    </a>
+                    </a> -->
                 </div>
             </section>
             <section class="top-creators-section">
                 <h2>Top-creators</h2>
-                <div class="creators-list">
-                    <a href="flashcard.html">
+                <div class="creators-list" id="creators-list">
+                    <!-- <a href="flashcard.html">
                         <div class="course">第二課<br>30 terms <br>😍 longdeepzai</div>
                     </a>
                     <a href="flashcard.html">
                         <div class="course">第三課<br>26 terms <br>😍 longdeepzai</div>
-                    </a>
+                    </a> -->
                 </div>
             </section>
         </main>
@@ -187,6 +187,63 @@
     </footer>
 
     <script>
+        // Function to fetch and display decks
+        async function fetchDecks() {
+            try {
+                let response = await fetch('fetch_course.php');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                let decks = await response.json();
+                displayDecks(decks);
+            } catch (error) {
+                console.error('Error fetching decks:', error);
+            }
+        }
+
+        // Function to display decks
+        function displayDecks(decks) {
+            const courseList = document.getElementById('course-list');
+            const favouriteList = document.getElementById('favourite-list');
+            const creatorsList = document.getElementById('creators-list');
+            courseList.innerHTML = '';
+            favouriteList.innerHTML = '';
+            creatorsList.innerHTML = '';
+
+            decks.forEach(deck => {
+                const deckElement = document.createElement('a');
+                deckElement.href = `flashcard.html?deck_id=${deck.deck_id}`;
+                deckElement.innerHTML = `
+                    <div class="course">
+                        ${deck.name}<br>${deck.term_count} terms <br>😍 ${deck.creator}
+                    </div>
+                `;
+                courseList.appendChild(deckElement);
+
+                // Assuming you have a way to determine favourite decks
+                if (deck.is_favourite) {
+                    const favouriteElement = document.createElement('a');
+                    favouriteElement.href = `flashcard.html?deck_id=${deck.deck_id}`;
+                    favouriteElement.innerHTML = `
+                    <div class="course">${deck.name}<br>${deck.term_count} terms <br>😍 ${deck.creator}</div>
+                `;
+                    favouriteList.appendChild(favouriteElement);
+                }
+
+                // Assuming you have a way to determine top creators decks
+                if (deck.is_top_creator) {
+                    const creatorElement = document.createElement('a');
+                    creatorElement.href = `flashcard.html?deck_id=${deck.deck_id}`;
+                    creatorElement.innerHTML = `
+                    <div class="course">${deck.name}<br>${deck.term_count} terms <br>😍 ${deck.creator}</div>
+                `;
+                    creatorsList.appendChild(creatorElement);
+                }
+            });
+        }
+
+        // Fetch and display decks on page load
+        window.onload = fetchDecks;
 
         window.onclick = function (event) {
             if (!event.target.closest('.user-icon')) {
@@ -246,7 +303,7 @@
             const takeQuizzes = document.getElementById("take-quizzes");
             const quizResults = document.getElementById("quiz-results");
 
-            
+
             // Xóa active class khỏi cả hai nút
             quiz1.classList.remove('button-active');
             quiz2.classList.remove('button-active');
@@ -263,10 +320,10 @@
         }
 
         window.onload = function () {
-                const urlParams = new URLSearchParams(window.location.search);
-                const section = urlParams.get('section') || 'home';
-                showSection(section);
-            }
+            const urlParams = new URLSearchParams(window.location.search);
+            const section = urlParams.get('section') || 'home';
+            showSection(section);
+        }
 
 
         // Get all option elements
