@@ -69,31 +69,6 @@ CREATE TABLE `flashcard` (
 --
 
 INSERT INTO `flashcard` (`flashcard_id`, `deck_id`, `f_term`, `f_definition`, `f_image_url`, `created_at`) VALUES
-<<<<<<< HEAD
-(1, NULL, 'asd', 'asd', '', '2024-09-27 09:13:01'),
-(2, NULL, 'asd', '123', '', '2024-09-27 09:13:33'),
-(3, NULL, 'asd', '123', '', '2024-10-04 10:02:44'),
-(4, NULL, '123124', '1242rqwe', '', '2024-10-04 10:02:49'),
-(5, NULL, 'r243r23', '1qsdsdsddf', '', '2024-10-04 10:10:11'),
-(6, NULL, '43t3rsd', 'qwdferg', '', '2024-10-04 10:25:49'),
-(7, NULL, '猫', 'cat', '', '2024-10-04 10:35:43'),
-(8, NULL, '犬', 'DOG', '', '2024-10-08 11:27:46'),
-(9, NULL, '空', 'sky', '', '2024-10-09 20:40:40');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `flashcard_deck`
---
-
-CREATE TABLE `flashcard_deck` (
-  `deck_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `deckname` varchar(255) NOT NULL,
-  `description` mediumtext DEFAULT NULL,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-=======
 (1, 1, 'こんにちは', 'Hello', '', '2024-09-27 09:13:01'),
 (2, 1, 'ありがとう', 'Thank you', '', '2024-09-27 09:13:33'),
 (3, 1, 'さようなら', 'Goodbye', '', '2024-10-04 10:02:44'),
@@ -101,7 +76,6 @@ CREATE TABLE `flashcard_deck` (
 (5, 2, '仕事', 'Work', '', '2024-10-04 10:10:11'),
 (6, 3, '漢字', 'Kanji', '', '2024-10-04 10:15:22'),
 (7, 3, '日本', 'Japan', '', '2024-10-04 10:20:33');
->>>>>>> 076dd5082e2c3f11f8295c55997c751c90450cd8
 
 -- --------------------------------------------------------
 
