@@ -33,6 +33,26 @@
         /* Đẩy nội dung xuống dưới để không bị header che */
     }
 </style>
+<style>
+    .carousel-item {
+        transition: none !important;
+    }
+</style>
+<style>
+    .carousel-item {
+        transition: opacity 0.5s ease-in-out;
+        opacity: 0;
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+    }
+
+    .carousel-item.active {
+        opacity: 1;
+        position: relative;
+    }
+</style>
 
 <body>
     <header>
@@ -106,7 +126,7 @@
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get(param);
         }
-
+    
         async function fetchFlashcardsAndCourse(deckId) {
             try {
                 let response = await fetch(`fetch_flashcard.php?deck_id=${deckId}`);
@@ -120,16 +140,16 @@
                 console.error('Error fetching flashcards and course details:', error);
             }
         }
-
+    
         function displayCourseDetails(course) {
             document.getElementById('course-title').innerText = course.name;
             document.getElementById('course-description').innerText = course.description;
         }
-
+    
         function displayFlashcards(flashcards) {
             const carouselInner = document.getElementById('carousel-inner');
             carouselInner.innerHTML = ''; // Xóa nội dung cũ nếu có
-
+    
             flashcards.forEach((flashcard, index) => {
                 const carouselItem = document.createElement('div');
                 carouselItem.className = 'carousel-item' + (index === 0 ? ' active' : '');
@@ -145,7 +165,7 @@
                 `;
                 carouselInner.appendChild(carouselItem);
             });
-
+    
             // Gán sự kiện click sau khi các flashcard đã được thêm vào DOM
             const flashCards = document.querySelectorAll('.flash-card');
             flashCards.forEach(flashCard => {
@@ -153,17 +173,19 @@
                     this.classList.toggle('flipped');
                 });
             });
-
+    
             // Update flashcard count
             updateFlashcardCount(1, flashcards.length);
-
+    
+            // Initialize carousel items
+            window.carouselItems = document.querySelectorAll('.carousel-item');
         }
-
+    
         function updateFlashcardCount(current, total) {
             const flashcardCount = document.getElementById('flashcard-count');
             flashcardCount.innerText = `${current}/${total}`;
         }
-
+    
         // Get deck_id from URL and fetch flashcards and course details
         const deckId = getQueryParam('deck_id');
         if (deckId) {
@@ -171,27 +193,24 @@
         } else {
             console.error('No deck_id provided in URL');
         }
-
+    
         document.addEventListener('DOMContentLoaded', function () {
-            
             let currentIndex = 0;
-
+    
             function showNextSlide() {
-                const carouselItems = document.querySelectorAll('.carousel-item');
-                carouselItems[currentIndex].classList.remove('active');
-                currentIndex = (currentIndex + 1) % carouselItems.length;
-                carouselItems[currentIndex].classList.add('active');
-                updateFlashcardCount(currentIndex + 1, carouselItems.length);
+                window.carouselItems[currentIndex].classList.remove('active');
+                currentIndex = (currentIndex + 1) % window.carouselItems.length;
+                window.carouselItems[currentIndex].classList.add('active');
+                updateFlashcardCount(currentIndex + 1, window.carouselItems.length);
             }
-
+    
             function showPrevSlide() {
-                const carouselItems = document.querySelectorAll('.carousel-item');
-                carouselItems[currentIndex].classList.remove('active');
-                currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
-                carouselItems[currentIndex].classList.add('active');
-                updateFlashcardCount(currentIndex + 1, carouselItems.length);
+                window.carouselItems[currentIndex].classList.remove('active');
+                currentIndex = (currentIndex - 1 + window.carouselItems.length) % window.carouselItems.length;
+                window.carouselItems[currentIndex].classList.add('active');
+                updateFlashcardCount(currentIndex + 1, window.carouselItems.length);
             }
-
+    
             document.querySelector('.carousel-control-next').addEventListener('click', showNextSlide);
             document.querySelector('.carousel-control-prev').addEventListener('click', showPrevSlide);
         });
