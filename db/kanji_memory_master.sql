@@ -24,16 +24,43 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `flashcard_deck`
+--
+
+CREATE TABLE `flashcard_deck` (
+  `deck_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `deckname` varchar(255) NOT NULL,
+  `description` mediumtext DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`deck_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `flashcard_deck`
+--
+
+INSERT INTO flashcard_deck (deck_id, user_id, deckname, description, created_at) VALUES
+(1, 1, 'Basic Japanese Vocabulary', 'Deck for basic Japanese vocabulary', '2024-09-27 09:00:00'),
+(2, 1, 'Advanced Japanese Vocabulary', 'Deck for advanced Japanese vocabulary', '2024-09-27 09:05:00'),
+(3, 2, 'Japanese Kanji Characters', 'Deck for learning Japanese Kanji characters', '2024-09-27 09:10:00');
+
+-- --------------------------------------------------------
+
+
+--
 -- Table structure for table `flashcard`
 --
 
 CREATE TABLE `flashcard` (
-  `flashcard_id` int(11) NOT NULL,
+  `flashcard_id` int(11) NOT NULL AUTO_INCREMENT,
   `deck_id` int(11) DEFAULT NULL,
   `f_term` varchar(255) NOT NULL,
-  `f_definition` varchar(255) NOT NULL,
-  `f_image_url` mediumtext DEFAULT NULL,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp()
+  `f_definition` text NOT NULL,
+  `f_image_url` varchar(255) DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`flashcard_id`),
+  FOREIGN KEY (`deck_id`) REFERENCES `flashcard_deck`(`deck_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
@@ -41,11 +68,13 @@ CREATE TABLE `flashcard` (
 --
 
 INSERT INTO `flashcard` (`flashcard_id`, `deck_id`, `f_term`, `f_definition`, `f_image_url`, `created_at`) VALUES
-(1, NULL, 'asd', 'asd', '', '2024-09-27 09:13:01'),
-(2, NULL, 'asd', '123', '', '2024-09-27 09:13:33'),
-(3, NULL, 'asd', '123', '', '2024-10-04 10:02:44'),
-(4, NULL, '123124', '1242rqwe', '', '2024-10-04 10:02:49'),
-(5, NULL, 'r243r23', '1qsdsdsddf', '', '2024-10-04 10:10:11');
+(1, 1, 'こんにちは', 'Hello', '', '2024-09-27 09:13:01'),
+(2, 1, 'ありがとう', 'Thank you', '', '2024-09-27 09:13:33'),
+(3, 1, 'さようなら', 'Goodbye', '', '2024-10-04 10:02:44'),
+(4, 2, '勉強', 'Study', '', '2024-10-04 10:02:49'),
+(5, 2, '仕事', 'Work', '', '2024-10-04 10:10:11'),
+(6, 3, '漢字', 'Kanji', '', '2024-10-04 10:15:22'),
+(7, 3, '日本', 'Japan', '', '2024-10-04 10:20:33');
 
 -- --------------------------------------------------------
 
@@ -54,12 +83,22 @@ INSERT INTO `flashcard` (`flashcard_id`, `deck_id`, `f_term`, `f_definition`, `f
 --
 
 CREATE TABLE `flashcard_deck` (
-  `deck_id` int(11) NOT NULL,
+  `deck_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `deckname` varchar(255) NOT NULL,
   `description` mediumtext DEFAULT NULL,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp()
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`deck_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `flashcard_deck`
+--
+
+INSERT INTO flashcard_deck (deck_id, user_id, deckname, description, created_at) VALUES
+(1, 1, 'Basic Japanese Vocabulary', 'Deck for basic Japanese vocabulary', '2024-09-27 09:00:00'),
+(2, 1, 'Advanced Japanese Vocabulary', 'Deck for advanced Japanese vocabulary', '2024-09-27 09:05:00'),
+(3, 2, 'Japanese Kanji Characters', 'Deck for learning Japanese Kanji characters', '2024-09-27 09:10:00');
 
 -- --------------------------------------------------------
 
