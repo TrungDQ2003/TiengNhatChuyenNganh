@@ -59,90 +59,144 @@
 
     <nav class="sidebar" id="sidebar">
         <ul>
-            <a href="HomePage.html?section=home"><li class="active"><span class="icon"></span> Home</li></a>
-            <a href="HomePage.html?section=library"><li><span class="icon"></span> Your library</li></a>
+            <a href="HomePage.html?section=home">
+                <li class="active"><span class="icon"></span> Home</li>
+            </a>
+            <a href="HomePage.html?section=library">
+                <li><span class="icon"></span> Your library</li>
+            </a>
             <p>Learn</p>
-            <a href="HomePage.html?section=quizzes"><li><span class="icon"></span> Quizzes</li></a>
+            <a href="HomePage.html?section=quizzes">
+                <li><span class="icon"></span> Quizzes</li>
+            </a>
         </ul>
     </nav>
     <div class="container" id="container">
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 content" style="" id="main">
-            <h3>Your Course</h3>
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 content" id="main">
+            <h3 id="course-title">Your Course</h3>
+            <p style="width: 100%;" id="course-description"></p>
             <hr>
-            <div id="flashCard" style="padding: 20px;" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="flash-card">
-                            <div class="font">
-                                <p>時間</p>
-                            </div>
-                            <div class="back">
-                                <p>Thời gian</p>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="flash-card">
-                            <div class="font">
-                                <p>空間</p>
-                            </div>
-                            <div class="back">
-                                <p>Khoảng không gian</p>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="flash-card">
-                            <div class="font">
-                                <p>場所</p>
-                            </div>
-
-                            <div class="back">
-                                <p>Nơi chốn</p>
-                            </div>
-                        </div>
-                    </div>
-
+            <div id="flashCard" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner" id="carousel-inner">
+                    <!-- Các flashcard sẽ được hiển thị ở đây -->
                 </div>
-                <div class="carousel-controls">
-                    <button class="carousel-control-prev" style="width: 30%;" type="button" data-bs-target="#flashCard"
-                        data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <p>3/60</p>
-                    <button class="carousel-control-next" style="width: 30%;" type="button" data-bs-target="#flashCard"
-                        data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
-            </div>
-            <div>
 
             </div>
-        </main>
+            <div class="carousel-controls">
+                <button class="carousel-control-prev" style="width: 30%;" type="button" data-bs-target="#flashCard"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <p id="flashcard-count">1/1</p>
+                <button class="carousel-control-next" style="width: 30%;" type="button" data-bs-target="#flashCard"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
     </div>
 
+
+
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        // Function to get query parameter
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        async function fetchFlashcardsAndCourse(deckId) {
+            try {
+                let response = await fetch(`fetch_flashcard.php?deck_id=${deckId}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                let data = await response.json();
+                displayCourseDetails(data.course);
+                displayFlashcards(data.flashcards);
+            } catch (error) {
+                console.error('Error fetching flashcards and course details:', error);
+            }
+        }
+
+        function displayCourseDetails(course) {
+            document.getElementById('course-title').innerText = course.name;
+            document.getElementById('course-description').innerText = course.description;
+        }
+
+        function displayFlashcards(flashcards) {
+            const carouselInner = document.getElementById('carousel-inner');
+            carouselInner.innerHTML = ''; // Xóa nội dung cũ nếu có
+
+            flashcards.forEach((flashcard, index) => {
+                const carouselItem = document.createElement('div');
+                carouselItem.className = 'carousel-item' + (index === 0 ? ' active' : '');
+                carouselItem.innerHTML = `
+                    <div class="flash-card">
+                        <div class="font">
+                            <p>${flashcard.term}</p>
+                        </div>
+                        <div class="back">
+                            <p>${flashcard.definition}</p>
+                        </div>
+                    </div>
+                `;
+                carouselInner.appendChild(carouselItem);
+            });
+
+            // Gán sự kiện click sau khi các flashcard đã được thêm vào DOM
             const flashCards = document.querySelectorAll('.flash-card');
-            const carouselItems = document.querySelectorAll('.carousel-item');
-            let currentIndex = 0;
             flashCards.forEach(flashCard => {
                 flashCard.addEventListener('click', function () {
                     this.classList.toggle('flipped');
                 });
             });
+
+            // Update flashcard count
+            updateFlashcardCount(1, flashcards.length);
+
+        }
+
+        function updateFlashcardCount(current, total) {
+            const flashcardCount = document.getElementById('flashcard-count');
+            flashcardCount.innerText = `${current}/${total}`;
+        }
+
+        // Get deck_id from URL and fetch flashcards and course details
+        const deckId = getQueryParam('deck_id');
+        if (deckId) {
+            fetchFlashcardsAndCourse(deckId);
+        } else {
+            console.error('No deck_id provided in URL');
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            let currentIndex = 0;
+
             function showNextSlide() {
+                const carouselItems = document.querySelectorAll('.carousel-item');
                 carouselItems[currentIndex].classList.remove('active');
                 currentIndex = (currentIndex + 1) % carouselItems.length;
                 carouselItems[currentIndex].classList.add('active');
+                updateFlashcardCount(currentIndex + 1, carouselItems.length);
             }
+
+            function showPrevSlide() {
+                const carouselItems = document.querySelectorAll('.carousel-item');
+                carouselItems[currentIndex].classList.remove('active');
+                currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
+                carouselItems[currentIndex].classList.add('active');
+                updateFlashcardCount(currentIndex + 1, carouselItems.length);
+            }
+
+            document.querySelector('.carousel-control-next').addEventListener('click', showNextSlide);
+            document.querySelector('.carousel-control-prev').addEventListener('click', showPrevSlide);
         });
     </script>
+
     <script>
 
         function toggleDropdown() {
@@ -152,7 +206,7 @@
             } else {
                 dropdownMenu.style.display = "block";
             }
-        } 
+        }
 
         // Close the dropdown when clicking outside
         window.onclick = function (event) {
